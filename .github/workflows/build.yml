@@ -1,0 +1,106 @@
+
+name: Build, Test and Create Installer
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+
+    # --- ソースコードを作業環境(ランナー)にダウンロード(取得・クローン) --- 
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    # --- .NET SDKをインストールし、使えるようにする(.netframeworkは関係ないけど害はない) --- 
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+
+    # --- プロジェクトに必要な依存関係をダウンロードして修復 ---
+    - name: Restore
+      run: dotnet restore
+
+    # --- .netをビルド ---
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+
+    # --- ビルド出力先 --
+    - name: Check build output
+      run: dir StudyTest1/bin/Release
+
+    # --- テストを実施 ---
+    - name: Test
+      run: dotnet test --configuration Release --no-build --logger "trx"
+
+    # --- テスト結果を出力 ---
+    - name: Upload test results
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-results
+        path: "**/TestResults/*.trx"
+
+    # --- 最新タグを取得 ---
+    - name: Get latest tag
+      id: get_tag
+      run: |
+        $tags = git tag --sort=-v:refname
+        if ($tags.Length -eq 0) {
+          $latest = "v1.0.0"
+        } else {
+          $latest = $tags[0]
+        }
+        echo "latest=$latest" >> $env:GITHUB_OUTPUT
+
+    # --- 次のバージョンを計算 ---
+    - name: Calculate next version
+      id: version
+      run: |
+        $latest = "${{ steps.get_tag.outputs.latest }}"
+        $ver = $latest.TrimStart("v")
+        $parts = $ver.Split('.')
+        $major = [int]$parts[0]
+        $minor = [int]$parts[1]
+        $patch = [int]$parts[2] + 1
+        $newVersion = "v$major.$minor.$patch"
+        echo "newVersion=$newVersion" >> $env:GITHUB_OUTPUT
+    
+    # --- 新しいタグを作成 ---
+    - name: Create new tag
+      run: |
+        git tag ${{ steps.version.outputs.newVersion }}
+        git push origin ${{ steps.version.outputs.newVersion }}
+
+    # --- バージョン付きReleaseを作成 ---
+    - name: Create Versioned Release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ steps.version.outputs.newVersion }}
+        name: "Version ${{ steps.version.outputs.newVersion }}"
+        files: |
+          "StudyTest2/Installer/StudyTest2_SetUp.exe"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+    # --- Latest Releaseを上書き(コメントも更新) ---
+    - name: Create Latest Release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: latest
+        name: "Latest Build"
+        body: |
+          最新ビルドが生成されました。
+
+          Version: ${{ steps.version.outputs.newVersion }}
+          Commit: ${{ github.sha }}
+          Message: ${{ github.event.head_commit.message }}
+          Date: ${{ github.event.head_commit.timestamp }}
+        files: |
+          "StudyTest1/Installer/StudyTest1_SetUp.exe"
+        overwrite_files: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
