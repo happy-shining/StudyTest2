@@ -79,15 +79,7 @@ jobs:
 
     # --- テスト ---
     - name: CheckDir1
-      run: dir StudyTest2/Installer/StudyTest2_SetUp.exe
-    
-    # --- テスト ---
-    - name: CheckDir2
-      run: dir StudyTest2/StudyTest2/Installer/StudyTest2_SetUp.exe
-    
-    # --- テスト ---
-    - name: CheckDir3
-      run: dir StudyTest2/StudyTest2/StudyTest2/Installer/StudyTest2_SetUp.exe
+      run: dir ../Installer/StudyTest2_SetUp.exe
     
     # --- バージョン付きReleaseを作成 ---
     - name: Create Versioned Release
