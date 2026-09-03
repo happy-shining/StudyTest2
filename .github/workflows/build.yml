@@ -80,65 +80,65 @@ jobs:
     # --- テスト1 ---
     - name: CheckDir1
       run: |
-        if [ -d "Installer" ]; then
-          echo "ディレクトリが存在します"
-        else
-          echo "ディレクトリは存在しません"
-        fi 
+        if (Test-Path -Path "Installer" -PathType Container) {
+          Write-Host "ディレクトリが存在します"
+        } else {
+          Write-Host "ディレクトリは存在しません"
+        }
 
     # --- テスト2 ---
     - name: CheckDir2
       run: |
-        if [ -d "../Installer" ]; then
-          echo "ディレクトリが存在します"
-        else
-          echo "ディレクトリは存在しません"
-        fi 
+        if (Test-Path -Path "../Installer" -PathType Container) {
+          Write-Host "ディレクトリが存在します"
+        } else {
+          Write-Host "ディレクトリは存在しません"
+        }
 
     # --- テスト3 ---
     - name: CheckDir3
       run: |
-        if [ -d "../../Installer" ]; then
-          echo "ディレクトリが存在します"
-        else
-          echo "ディレクトリは存在しません"
-        fi 
+        if (Test-Path -Path "../../Installer" -PathType Container) {
+          Write-Host "ディレクトリが存在します"
+        } else {
+          Write-Host "ディレクトリは存在しません"
+        }
 
     # --- テスト4 ---
     - name: CheckDir4
       run: |
-        if [ -d "../../../Installer" ]; then
-          echo "ディレクトリが存在します"
-        else
-          echo "ディレクトリは存在しません"
-        fi 
+        if (Test-Path -Path "../../../Installer" -PathType Container) {
+          Write-Host "ディレクトリが存在します"
+        } else {
+          Write-Host "ディレクトリは存在しません"
+        }
 
     # --- テスト5 ---
     - name: CheckDir5
       run: |
-        if [ -d "../../../StudyTest2/Installer" ]; then
-          echo "ディレクトリが存在します"
-        else
-          echo "ディレクトリは存在しません"
-        fi 
+        if (Test-Path -Path "../../../StudyTest2/Installer" -PathType Container) {
+          Write-Host "ディレクトリが存在します"
+        } else {
+          Write-Host "ディレクトリは存在しません"
+        }
 
     # --- テスト6 ---
     - name: CheckDir6
       run: |
-        if [ -d "../../../StudyTest2/StudyTest2/Installer" ]; then
-          echo "ディレクトリが存在します"
-        else
-          echo "ディレクトリは存在しません"
-        fi 
+        if (Test-Path -Path "../../../StudyTest2/StudyTest2/Installer" -PathType Container) {
+          Write-Host "ディレクトリが存在します"
+        } else {
+          Write-Host "ディレクトリは存在しません"
+        }
 
     # --- テスト7 ---
     - name: CheckDir7
       run: |
-        if [ -d "../../../StudyTest2/StudyTest2/StudyTest2/Installer" ]; then
-          echo "ディレクトリが存在します"
-        else
-          echo "ディレクトリは存在しません"
-        fi 
+        if (Test-Path -Path "../../../StudyTest2/StudyTest2/StudyTest2/Installer" -PathType Container) {
+          Write-Host "ディレクトリが存在します"
+        } else {
+          Write-Host "ディレクトリは存在しません"
+        }
 
     # --- バージョン付きReleaseを作成 ---
     - name: Create Versioned Release
