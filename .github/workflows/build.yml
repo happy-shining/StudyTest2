@@ -77,10 +77,34 @@ jobs:
         git tag ${{ steps.version.outputs.newVersion }}
         git push origin ${{ steps.version.outputs.newVersion }}
 
-    # --- テスト ---
+    # --- テスト1 ---
     - name: CheckDir1
-      run: dir "../Installer"
-    
+      run: test -d "Installer" || echo "存在しません"
+
+    # --- テスト2 ---
+    - name: CheckDir2
+      run: test -d "../Installer" || echo "存在しません"
+
+    # --- テスト3 ---
+    - name: CheckDir3
+      run: test -d "../../Installer" || echo "存在しません"
+
+    # --- テスト4 ---
+    - name: CheckDir4
+      run: test -d "../../../Installer" || echo "存在しません"
+
+    # --- テスト5 ---
+    - name: CheckDir5
+      run: test -d "../../../StudyTest2/Installer" || echo "存在しません"
+
+    # --- テスト6 ---
+    - name: CheckDir6
+      run: test -d "../../../StudyTest2/StudyTest2/Installer" || echo "存在しません"
+
+    # --- テスト7 ---
+    - name: CheckDir7
+      run: test -d "../../../StudyTest2/StudyTest2/StudyTest2/Installer" || echo "存在しません"
+
     # --- バージョン付きReleaseを作成 ---
     - name: Create Versioned Release
       uses: softprops/action-gh-release@v1
