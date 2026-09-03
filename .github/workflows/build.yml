@@ -79,31 +79,66 @@ jobs:
 
     # --- テスト1 ---
     - name: CheckDir1
-      run: test -d "Installer" || echo "存在しません"
+      run: |
+        if [ -d "Installer" ]; then
+          echo "ディレクトリが存在します"
+        else
+          echo "ディレクトリは存在しません"
+        fi 
 
     # --- テスト2 ---
     - name: CheckDir2
-      run: test -d "../Installer" || echo "存在しません"
+      run: |
+        if [ -d "../Installer" ]; then
+          echo "ディレクトリが存在します"
+        else
+          echo "ディレクトリは存在しません"
+        fi 
 
     # --- テスト3 ---
     - name: CheckDir3
-      run: test -d "../../Installer" || echo "存在しません"
+      run: |
+        if [ -d "../../Installer" ]; then
+          echo "ディレクトリが存在します"
+        else
+          echo "ディレクトリは存在しません"
+        fi 
 
     # --- テスト4 ---
     - name: CheckDir4
-      run: test -d "../../../Installer" || echo "存在しません"
+      run: |
+        if [ -d "../../../Installer" ]; then
+          echo "ディレクトリが存在します"
+        else
+          echo "ディレクトリは存在しません"
+        fi 
 
     # --- テスト5 ---
     - name: CheckDir5
-      run: test -d "../../../StudyTest2/Installer" || echo "存在しません"
+      run: |
+        if [ -d "../../../StudyTest2/Installer" ]; then
+          echo "ディレクトリが存在します"
+        else
+          echo "ディレクトリは存在しません"
+        fi 
 
     # --- テスト6 ---
     - name: CheckDir6
-      run: test -d "../../../StudyTest2/StudyTest2/Installer" || echo "存在しません"
+      run: |
+        if [ -d "../../../StudyTest2/StudyTest2/Installer" ]; then
+          echo "ディレクトリが存在します"
+        else
+          echo "ディレクトリは存在しません"
+        fi 
 
     # --- テスト7 ---
     - name: CheckDir7
-      run: test -d "../../../StudyTest2/StudyTest2/StudyTest2/Installer" || echo "存在しません"
+      run: |
+        if [ -d "../../../StudyTest2/StudyTest2/StudyTest2/Installer" ]; then
+          echo "ディレクトリが存在します"
+        else
+          echo "ディレクトリは存在しません"
+        fi 
 
     # --- バージョン付きReleaseを作成 ---
     - name: Create Versioned Release
