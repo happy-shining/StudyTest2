@@ -31,7 +31,7 @@ jobs:
 
     # --- ビルド出力先 --
     - name: Check build output
-      run: dir StudyTest1/bin/Release
+      run: dir StudyTest2/bin/Release
 
     # --- テストを実施 ---
     - name: Test
@@ -100,7 +100,7 @@ jobs:
           Message: ${{ github.event.head_commit.message }}
           Date: ${{ github.event.head_commit.timestamp }}
         files: |
-          "StudyTest1/Installer/StudyTest1_SetUp.exe"
+          "StudyTest2/Installer/StudyTest2_SetUp.exe"
         overwrite_files: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
