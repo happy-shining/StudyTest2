@@ -15,7 +15,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
       with: 
-        fetch-deption: 0
+        fetch-depth: 0
 
     # --- .NET SDKをインストールし、使えるようにする(.netframeworkは関係ないけど害はない) --- 
     - name: Setup .NET SDK
