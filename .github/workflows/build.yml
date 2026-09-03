@@ -14,6 +14,8 @@ jobs:
     # --- ソースコードを作業環境(ランナー)にダウンロード(取得・クローン) --- 
     - name: Checkout
       uses: actions/checkout@v4
+      with: 
+        fetch-deption: 0
 
     # --- .NET SDKをインストールし、使えるようにする(.netframeworkは関係ないけど害はない) --- 
     - name: Setup .NET SDK
