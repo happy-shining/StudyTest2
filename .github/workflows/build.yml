@@ -82,7 +82,7 @@ jobs:
       run: |
         $target = "Installer"
 
-        $fullPath = [System.IO.Path]::GetFullPath($trget)
+        $fullPath = [System.IO.Path]::GetFullPath($target)
         Write-Host "絶対パス: $fullPath"
 
         if (Test-Path -Path $target -PathType Container) {
@@ -96,7 +96,7 @@ jobs:
       run: |
         $target = "../Installer"
 
-        $fullPath = [System.IO.Path]::GetFullPath($trget)
+        $fullPath = [System.IO.Path]::GetFullPath($target)
         Write-Host "絶対パス: $fullPath"
 
         if (Test-Path -Path $target -PathType Container) {
@@ -110,7 +110,7 @@ jobs:
       run: |
         $target = "../../Installer"
 
-        $fullPath = [System.IO.Path]::GetFullPath($trget)
+        $fullPath = [System.IO.Path]::GetFullPath($target)
         Write-Host "絶対パス: $fullPath"
 
         if (Test-Path -Path $target -PathType Container) {
@@ -124,7 +124,7 @@ jobs:
       run: |
         $target = "../../../Installer"
 
-        $fullPath = [System.IO.Path]::GetFullPath($trget)
+        $fullPath = [System.IO.Path]::GetFullPath($target)
         Write-Host "絶対パス: $fullPath"
 
         if (Test-Path -Path $target -PathType Container) {
@@ -138,7 +138,7 @@ jobs:
       run: |
         $target = "../../../StudyTest2/Installer"
 
-        $fullPath = [System.IO.Path]::GetFullPath($trget)
+        $fullPath = [System.IO.Path]::GetFullPath($target)
         Write-Host "絶対パス: $fullPath"
 
         if (Test-Path -Path $target -PathType Container) {
@@ -152,7 +152,7 @@ jobs:
       run: |
         $target = "../../../StudyTest2/StudyTest2/Installer"
 
-        $fullPath = [System.IO.Path]::GetFullPath($trget)
+        $fullPath = [System.IO.Path]::GetFullPath($target)
         Write-Host "絶対パス: $fullPath"
 
         if (Test-Path -Path $target -PathType Container) {
@@ -166,7 +166,7 @@ jobs:
       run: |
         $target = "StudyTest2/Installer"
 
-        $fullPath = [System.IO.Path]::GetFullPath($trget)
+        $fullPath = [System.IO.Path]::GetFullPath($target)
         Write-Host "絶対パス: $fullPath"
 
         if (Test-Path -Path $target -PathType Container) {
