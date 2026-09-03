@@ -79,7 +79,7 @@ jobs:
 
     # --- テスト ---
     - name: CheckDir1
-      run: dir "$%GITHUB_WORKSPACE%\StudyTest2\StudyTest2\StudyTest2/Installer"
+      run: dir "../Installer"
     
     # --- バージョン付きReleaseを作成 ---
     - name: Create Versioned Release
